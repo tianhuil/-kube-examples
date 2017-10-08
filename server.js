@@ -1,6 +1,7 @@
 var http = require('http');
 
-var greeting = process.env.GREETING
+var greeting = process.env.GREETING,
+    port = process.env.PORT || 80
 
 var handleRequest = function(request, response) {
   console.log('Received request for URL: ' + request.url);
@@ -8,4 +9,4 @@ var handleRequest = function(request, response) {
   response.end(greeting);
 };
 var www = http.createServer(handleRequest);
-www.listen(9000);
+www.listen(port);
