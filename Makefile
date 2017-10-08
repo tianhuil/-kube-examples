@@ -1,5 +1,5 @@
 image:
-	eval $(minikube docker-env) && docker build -t hello-node:v1 .
+	eval $$(minikube docker-env) && docker build -t hello-node:v2 .
 
 create:
 	kubectl create -f deployment.yaml --validate=false

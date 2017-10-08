@@ -11,7 +11,10 @@ spec:
     spec:
       containers:
       - name: hello-node
-        image: hello-node:v1
+        image: hello-node:v2
         ports:
-          - containerPort: 9000
-            protocol: TCP
+        - containerPort: 9000
+          protocol: TCP
+        env:
+        - name: GREETING
+          value: "Hello World Env Var"
