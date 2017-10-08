@@ -1,7 +1,7 @@
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
-  name: hello-node
+  name: hello-node-deployment
 spec:
   replicas: 2
   template:
@@ -10,7 +10,7 @@ spec:
         run: hello-node
     spec:
       containers:
-      - name: hello-node
+      - name: hello-node-pod
         image: hello-node:v2
         ports:
         - containerPort: 9000

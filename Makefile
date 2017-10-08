@@ -10,7 +10,7 @@ delete:
 	kubectl delete -f service.yaml
 
 server:
-	minikube service hello-node
+	minikube service hello-node-service
 
 log:
 	kubectl logs -l run=hello-node
