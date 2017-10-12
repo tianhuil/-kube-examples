@@ -3,6 +3,8 @@ var http = require('http');
 var backend = process.env.BACKEND,
     port = process.env.PORT || 80
 
+console.log('Serving from port ' + port);
+
 var handleRequest = function(request, response) {
   console.log('Received request for URL: ' + request.url);
   http.get(backend + request.url, function(res) {
