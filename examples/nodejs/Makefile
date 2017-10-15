@@ -1,5 +1,5 @@
 image:
-	eval $$(minikube docker-env) && docker build -t hello-node:v2 .
+	eval $$(minikube docker-env) && docker build -t hello-node:v1 .
 
 create:
 	kubectl create -f deployment.yaml --validate=false
@@ -14,3 +14,6 @@ server:
 
 log:
 	kubectl logs -l run=hello-node
+
+run-docker:
+	docker run hello-node:v1
