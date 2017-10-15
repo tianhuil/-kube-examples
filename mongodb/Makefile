@@ -16,4 +16,4 @@ docker-app:
 
 docker-delete:
 	docker rm app -f
-	docker rm mvertes/alpine-mongo -f
+	docker rm mongo -f
