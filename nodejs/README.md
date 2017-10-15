@@ -1,4 +1,4 @@
-# nodekube
+# nodejs
 A simple Nodejs Kubernetes setup
 
 # Instructions
