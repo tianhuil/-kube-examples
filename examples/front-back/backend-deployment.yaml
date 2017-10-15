@@ -1,0 +1,20 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: backend-deployment
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        run: backend
+    spec:
+      containers:
+      - name: backend-pod
+        image: backend:v1
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        env:
+        - name: PORT
+          value: "80"

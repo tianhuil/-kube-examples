@@ -1,0 +1,22 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        run: frontend
+    spec:
+      containers:
+      - name: frontend-pod
+        image: frontend:v1
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        env:
+        - name: PORT
+          value: "80"
+        - name: BACKEND
+          value: "http://backend-service.default.svc.cluster.local:80"

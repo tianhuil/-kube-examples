@@ -1,5 +1,3 @@
-MINIKUBE_DOCKER_ENV=$$(minikube docker-env)
-
 simple-backend:
 	PORT=9001 node backend/server.js
 
@@ -23,3 +21,25 @@ docker-end:
 	docker rm frontend -f
 	docker rm backend -f
 	docker network rm front-back
+
+build:
+	eval $$(minikube docker-env) && docker build -t backend:v1 backend/.
+	eval $$(minikube docker-env) && docker build -t frontend:v1 frontend/.
+
+create:
+	kubectl create -f backend-deployment.yaml --validate=false
+	kubectl create -f backend-service.yaml --validate=false
+	kubectl create -f frontend-deployment.yaml --validate=false
+	kubectl create -f frontend-service.yaml --validate=false
+
+server-backend:
+	minikube service backend-service
+
+server-frontend:
+	minikube service frontend-service
+
+delete:
+	kubectl delete -f backend-deployment.yaml
+	kubectl delete -f backend-service.yaml
+	kubectl delete -f frontend-deployment.yaml
+	kubectl delete -f frontend-service.yaml
