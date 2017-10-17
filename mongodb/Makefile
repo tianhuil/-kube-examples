@@ -17,3 +17,22 @@ docker-app:
 docker-delete:
 	docker rm app -f
 	docker rm mongo -f
+
+build:
+	eval $$(minikube docker-env) && docker build -t app:v1 app/.
+	eval $$(minikube docker-env) && docker build -t mongo:v1 mongo/.
+
+create:
+	kubectl create -f mongo/mongo-deployment.yaml --validate=false
+	kubectl create -f mongo/mongo-service.yaml --validate=false
+	kubectl create -f app/app-deployment.yaml --validate=false
+	kubectl create -f app/app-service.yaml --validate=false
+
+server-log:
+	kubectl logs `kubectl get pods | grep app-deployment |cut -d " " -f1`
+
+delete:
+	kubectl delete -f mongo/mongo-deployment.yaml
+	kubectl delete -f mongo/mongo-service.yaml
+	kubectl delete -f app/app-deployment.yaml
+	kubectl delete -f app/app-service.yaml

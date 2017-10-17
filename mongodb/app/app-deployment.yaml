@@ -1,0 +1,22 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: app-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: app
+    spec:
+      containers:
+      - name: app-pod
+        image: app:v1
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        env:
+        - name: PORT
+          value: "80"
+        - name: MONGO_URL
+          value: "mongodb://mongo-service.default.svc.cluster.local:27017"
