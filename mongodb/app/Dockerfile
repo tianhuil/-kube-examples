@@ -1,11 +1,11 @@
 FROM mhart/alpine-node:8
-WORKDIR /app
-COPY package.json package-lock.json ./
-RUN npm install --production
 
-FROM mhart/alpine-node:base-8
 WORKDIR /app
-COPY --from=0 /app .
 COPY . .
+
+# If you have native dependencies, you'll need extra tools
+# RUN apk add --no-cache make gcc g++ python
+
+RUN npm install --production
 EXPOSE 80
 CMD ["node", "server.js"]
