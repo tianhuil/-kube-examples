@@ -8,4 +8,5 @@ To get started, follow the instructions [here](https://kubernetes.io/docs/tutori
 To start minikube, run
 ```bash
 minikube start --vm-driver=xhyve
+kubectl config use-context minikube
 ```
