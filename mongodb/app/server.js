@@ -12,14 +12,14 @@ const HOST = '0.0.0.0';
 var MONGO_URL = process.env.MONGO_URL + "/myproject"
 
 // Use connect method to connect to the server
-MongoClient.connect(MONGO_URL).then(function(db) {
+MongoClient.connect(MONGO_URL).then((db) => {
   const collection = db.collection("counters", {w:1});
-  collection.insert({ name: "counter", ran: 0 }, {w:1}).then(function(res) {
+  collection.insert({ name: "counter", ran: 0 }, {w:1}).then((res) => {
     return collection.findOne({ name: "counter" });
-  }).then(function(doc) {
+  }).then((doc) => {
     console.log(`Connected successfully to server ${doc.ran}`);
     return db.close();
-  }).catch(function(err) {
+  }).catch((err) => {
     console.log(err);
   });
 });
@@ -27,9 +27,9 @@ MongoClient.connect(MONGO_URL).then(function(db) {
 // App
 const app = express();
 app.get('/', (req, res) => {
-  MongoClient.connect(MONGO_URL).then(function(db) {
+  MongoClient.connect(MONGO_URL).then((db) => {
     const collection = db.collection("counters")
-    collection.findOne({ name: "counter" }).then(function(doc) {
+    collection.findOne({ name: "counter" }).then((doc) => {
       console.log(`Hitting / with ${doc.ran}`);
       res.send(`Hello world ${doc.ran}\n`);
       return collection.update(
@@ -37,9 +37,9 @@ app.get('/', (req, res) => {
         { $inc: { ran: 1 }},
         { upsert: true, w: 1}
       );
-    }).then(function(doc) {
+    }).then((doc) => {
       return db.close();
-    }).catch(function(err) {
+    }).catch((err) => {
       console.log(err);
     });
   })
