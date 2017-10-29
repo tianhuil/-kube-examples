@@ -8,6 +8,8 @@ const express = require('express'),
 const PORT = process.env.PORT;
 const HOST = '0.0.0.0';
 
+
+
 // Connection URL
 var MONGO_URL = process.env.MONGO_URL + "/myproject"
 
@@ -25,7 +27,10 @@ MongoClient.connect(MONGO_URL).then((db) => {
     .catch((err) => {
       console.log(err);
     });
-});
+})
+.catch((err) => {
+  console.log(err);
+});;
 
 // App
 const app = express();
@@ -49,7 +54,11 @@ app.get('/', (req, res) => {
         console.log(err);
       });
   })
-});
+  .catch((err) => {
+    console.log(err);
+  });
+})
+
 
 app.listen(PORT, HOST);
 console.log(`Running on http://${HOST}:${PORT}`);
