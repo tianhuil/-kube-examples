@@ -29,6 +29,9 @@ create:
 server-log:
 	kubectl logs `kubectl get pods | grep app-deployment |cut -d " " -f1`
 
+server:
+	minikube service app-service
+
 delete:
 	kubectl delete -f mongo/mongo.yaml
 	kubectl delete -f app/app.yaml
