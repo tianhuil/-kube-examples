@@ -6,11 +6,10 @@ metadata:
   labels:
     run: mongo
 spec:
-  type: LoadBalancer
   ports:
-    - port: 27017
-      targetPort: 27017
-      protocol: TCP
+  - port: 27017
+    targetPort: 27017
+  clusterIP: None
   selector:
     run: mongo
 ---
@@ -30,4 +29,3 @@ spec:
         image: mongo:v1
         ports:
         - containerPort: 27017
-          protocol: TCP
