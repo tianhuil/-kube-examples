@@ -1,5 +1,5 @@
 simple-app:
-	PORT=49160 node app/server.js
+	PORT=49160 MONGO_URL="mongodb://localhost:27017" node app/server.js
 
 docker-build:
 	docker build -t app:v1 app/.
