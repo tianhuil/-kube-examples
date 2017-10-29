@@ -30,20 +30,21 @@ MongoClient.connect(MONGO_URL, function(err, db) {
 const app = express();
 app.get('/', (req, res) => {
   MongoClient.connect(MONGO_URL, function(err, db) {
-    assert.equal(null, err);
-    db.collection("counters").findOne({ name: "counter" }, function(err, doc) {
+    const collection = db.collection("counters")
+    collection.findOne({ name: "counter" }).then(function(doc) {
       console.log(`Hitting / with ${doc.ran}`);
       res.send(`Hello world ${doc.ran}\n`);
-      db.collection("counters").update({
-        name: "counter"
-      }, { $inc: { ran: 1 }
-      }, { upsert: true, w: 1
-      }, function(err, doc) {
-          assert.equal(null, err);
-          return db.close();
-      });
+      return collection.update(
+        { name: "counter" },
+        { $inc: { ran: 1 }},
+        { upsert: true, w: 1}
+      );
+    }).then(function(doc) {
+      return db.close();
+    }).catch(function(err) {
+      console.log(err);
     });
-  });
+  })
 });
 
 app.listen(PORT, HOST);
