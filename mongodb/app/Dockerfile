@@ -6,7 +6,7 @@ COPY package.json .
 # If you have native dependencies, you'll need extra tools
 # RUN apk add --no-cache make gcc g++ python
 
-RUN npm install --production
+RUN yarn install --production
 EXPOSE 80
 COPY server.js .
-CMD ["node", "server.js"]
+CMD ["dumb-init", "node", "server.js"]

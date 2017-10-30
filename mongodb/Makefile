@@ -12,7 +12,8 @@ docker-mongo:
 	docker run --net=mongo --name mongo -it -p 27017:27017 mongo:v1
 
 docker-app:
-	docker run --net=mongo --name app -it -p 49160:80 -e PORT=80 -e MONGO_URL="mongodb://mongo:27017" app:v1
+	docker run --net=mongo --name app -it -p 49160:80 -v app:/app \
+		-e PORT=80 -e MONGO_URL="mongodb://mongo:27017" app:v1
 
 docker-delete:
 	docker rm app -f
