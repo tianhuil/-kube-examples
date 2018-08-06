@@ -1,0 +1,1 @@
+RBAC-based nginx based on [this tuorial](https://github.com/nginxinc/kubernetes-ingress/blob/master/docs/installation.md).
