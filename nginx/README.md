@@ -1,0 +1,1 @@
+Based on [this tutorial](https://hackernoon.com/setting-up-nginx-ingress-on-kubernetes-2b733d8d2f45).  Unable to get to work, probably because of RBAC issue.  See `nginx-rbac` folder.
